@@ -1,7 +1,7 @@
 import { NextPage, GetServerSideProps } from "next";
 import { useState } from 'react';
-// import "semanticui-ui-css/semanticui.min.css";
-import {Loader} from 'semantic-ui-react';
+import { Loader } from "semantic-ui-react";
+import "semantic-ui-css/semantic.min.css";
 
 interface Props {
   initialImageUrl: string;
@@ -12,7 +12,7 @@ const IndexPage: NextPage<Props> = ({ initialImageUrl }) => {
   const [loading, setLoading] = useState(false); 
 
   const clickHandle = () => {
-    // setLoading(true); 
+    setLoading(true); 
     fetchImage().then((newImage) => {      
       setImageUrl(newImage.message); 
       setLoading(false); 
@@ -28,12 +28,14 @@ const IndexPage: NextPage<Props> = ({ initialImageUrl }) => {
       minHeight: "100vm"
     }}>
     <h2 style={{marginTop:20}}>Meet with your friend today!</h2>
-    {/* {
-    loading ? <Loader active/>
+    {
+    loading ? <>
+    <Loader active inline="centered" size="huge" />
+    </>
     :
     <img style={{marginTop:20, width:300, maxHeight:500, height:"auto"}}  src={imageUrl} />
-    } */}
-    <img style={{marginTop:20, width:300, maxHeight:500, height:"auto"}}  src={imageUrl} />
+    }
+    {/* <img style={{marginTop:20, width:300, maxHeight:500, height:"auto"}}  src={imageUrl} /> */}
     <button style={{marginTop:20, width:300, height:40, borderColor:"#FFF", 
     backgroundColor:"#FF007F", color:"#FFF", borderRadius:"10px"}} onClick={clickHandle}>Who's Next?</button>
     </div>
@@ -60,4 +62,3 @@ const fetchImage = async (): Promise<Image> => {
   return images;
 };
 
-fetchImage(); 
